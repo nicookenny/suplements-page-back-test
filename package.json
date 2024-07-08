@@ -1,0 +1,12 @@
+{
+  "name": "suplement-page-backend",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "^5.16.1",
+    "@types/node": "^20.14.10",
+    "prisma": "^5.16.1",
+    "typescript": "^5.5.3"
+  }
+}
