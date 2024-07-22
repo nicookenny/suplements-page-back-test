@@ -1,8 +1,7 @@
 import express, { Express } from "express";
 import cors from "cors";
-
-//import authRoutes from "../routes/auth";
-//import orderRoutes from "../routes/orders";
+import authRoutes from "../routes/auth";
+import orderRoutes from "../routes/orders";
 
 export class Server {
   app: Express;
@@ -25,7 +24,7 @@ export class Server {
   }
 
   routes(): void {
-    this.app.use(this.authPath.authRoutes);
+    this.app.use(this.authPath, authRoutes);
     this.app.use(this.orderPath, orderRoutes);
   }
 
