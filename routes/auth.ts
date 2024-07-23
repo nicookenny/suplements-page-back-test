@@ -1,21 +1,23 @@
 import { Router } from "express";
 import { check } from "express-validator";
+import { existingEmail } from "../helpers/validationDB";
 import { register } from "../controllers/auth";
 import { login } from "../controllers/auth";
 import { verifyUser } from "../controllers/auth";
-import { mailExist } from "helpers/validacionesdb"; //este crep que no lo necesito.
 import { catchErrors } from "../middlewares/catchErrors";
+
 const router = Router();
 
 router.post(
   "/register",
   [
-    check("nombre", "El nombre es obligatorio").not().isEmpty(),
+    check("name", "El nombre es obligatorio").not().isEmpty(),
     check("email", "Email inválido").isEmail(),
     check("password", "Debe contener al menos 5 caracteres").isLength({
       min: 6,
     }),
-    catchErrors, // ver si lo necesito.
+    check("email").custom(existingEmail),
+    catchErrors,
   ],
   register
 );
@@ -35,8 +37,8 @@ router.post(
 router.patch(
   "/verify",
   [
-    check("email", "Email inválido").isEmail(),
-    check("code", "La verificación es obligatoria").not().isEmpty(),
+    check("email", "Email es obligatorio").not().isEmpty(),
+    check("code", "La verificación del usuario es obligatoria").not().isEmpty(),
     catchErrors,
   ],
   verifyUser

@@ -1,20 +1,18 @@
 import { Router } from "express";
-import newJWT from "../helpers/JWT";
-//import validarJWT from "../middlewares/validarJWT";
+import JWTvalidation from "../middlewares/JWTvalidation";
 import { catchErrors } from "../middlewares/catchErrors";
-
 import { createOrder, getOrders } from "../controllers/orders";
 import { check } from "express-validator";
-import { isVerified } from "../middlewares/validarVerificado";
+import { isVerified } from "../middlewares/verifyUser";
 
 const router = Router();
 
-router.get("/", [validarJWT, catchErrors], getOrders);
+router.get("/", [JWTvalidation, catchErrors], getOrders);
 
 router.post(
   "/",
   [
-    validarJWT,
+    JWTvalidation,
     isVerified,
     check("price", "El precio es obligatorio").not().isEmpty(),
     check("shippingCost", "El costo de envío es obligatorio").not().isEmpty(),
