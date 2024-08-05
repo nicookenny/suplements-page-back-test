@@ -37,7 +37,6 @@ model Order{
 
 model Item{
   tableId Int @id @default(autoincrement())
-  description String
   id Int
   price Float
   quantity Int
