@@ -32,7 +32,6 @@ export const createOrder = async (
     if (!Array.isArray(items) || items.length === 0) {
       return res.status(400).json({ msg: "El array de productos es inválido" });
     }
-
     if (!shippingDetails || typeof shippingDetails !== "object") {
       return res.status(400).json({ msg: "Detalles de envío inválidos" });
     }
@@ -43,6 +42,14 @@ export const createOrder = async (
         shippingCost,
         total,
         user: userId,
+        shippingDetails: {
+          create: {
+            name: shippingDetails.name,
+            cellphone: shippingDetails.cellphone,
+            location: shippingDetails.location,
+            address: shippingDetails.address,
+          },
+        },
       },
     });
 
@@ -57,7 +64,8 @@ export const createOrder = async (
       })),
     });
 
-    await prisma.shippingDetails.create({
+    //no se si sirve este
+    /* await prisma.shippingDetails.create({
       data: {
         name: shippingDetails.name,
         cellphone: shippingDetails.cellphone,
@@ -65,12 +73,24 @@ export const createOrder = async (
         address: shippingDetails.address,
         order: order.id,
       },
-    });
+    });*/
 
     const fullOrder = await prisma.order.findUnique({
       where: { id: order.id },
       include: { items: true, shippingDetails: true },
     });
+
+    console.log(
+      "Datos recibidos para crear la orden despues de completar shipping:",
+      {
+        price,
+        shippingCost,
+        total,
+        user: userId,
+        items,
+        shippingDetails,
+      }
+    );
 
     return res.status(201).json({ data: fullOrder });
   } catch (error) {
