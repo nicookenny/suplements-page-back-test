@@ -3,12 +3,15 @@ import { prisma } from "../app";
 
 export const getOrders = async (req: Request, res: Response): Promise<void> => {
   const userId: number = req.body.verifiedUser.id;
-  const orders = await prisma.order.findMany({
-    where: { user: userId },
-    include: { shippingDetails: true, items: true },
-  });
-
-  res.json({ data: orders });
+  try {
+    const orders = await prisma.order.findMany({
+      where: { user: userId },
+      include: { shippingDetails: true, items: true },
+    });
+    res.json({ data: orders });
+  } catch (error) {
+    res.status(500).json({ message: "Error al obtener las órdenes", error });
+  }
 };
 
 export const createOrder = async (
