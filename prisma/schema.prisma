@@ -58,4 +58,4 @@ model ShippingDetails{
   orders Order @relation(fields: [order], references: [id])
 }
 
-//Tengo que hacer la migracion a la base de datos con: npx prisma migrate dev --name init
+//Migracion a la base de datos: 1° npx prisma 2° migrate dev --name init
