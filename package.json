@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "index.js",
   "license": "MIT",
+  "scripts": {
+    "build": "prisma generate && tsc"
+  },
   "dependencies": {
     "@prisma/client": "^5.16.1",
     "@types/node": "^20.14.10",
