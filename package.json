@@ -4,7 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "prisma generate && tsc"
+    "build": "prisma generate && tsc",
+    "prisma:generate": "prisma generate",
+    "dev": "nodemon src/app.ts",
+    "start": "node dist/app.js"
   },
   "dependencies": {
     "@prisma/client": "^5.16.1",
