@@ -14,5 +14,13 @@
       "src": "/(.*)",
       "dest": "/api/$1"
     }
-  ]
+  ],
+  "build": {
+    "env": {
+      "DATABASE_URL": "@DATABASE_URL"
+    },
+    "commands": {
+      "build": "prisma generate && tsc"
+    }
+  }
 }
