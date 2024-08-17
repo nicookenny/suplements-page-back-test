@@ -4,8 +4,9 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "prisma generate && tsc",
+    "build": "tsc",
     "prisma:generate": "prisma generate",
+    "postinstall": "npm run prisma:generate",
     "dev": "nodemon app.ts",
     "start": "node dist/app.js"
   },
