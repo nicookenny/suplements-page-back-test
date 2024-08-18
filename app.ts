@@ -7,3 +7,5 @@ dotenv.config();
 export const prisma = new PrismaClient();
 const server = new Server();
 server.listen();
+
+export default server.app;
