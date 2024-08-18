@@ -13,7 +13,7 @@
     {
       "src": "/(.*)",
 
-      "dest": "app.ts"
+      "dest": "/api/index"
     }
   ]
 }
